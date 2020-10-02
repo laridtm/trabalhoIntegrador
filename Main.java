@@ -1,7 +1,8 @@
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 public class Main {
-
+    private static Principal principal = new Principal();
     public static void main(String[] args) {
         
         int menu = 0;
@@ -13,21 +14,27 @@ public class Main {
 
             switch (menu) {
                 case 1:
-            
-                    break;
+                    Objeto objeto = principal.cadastrarObjeto();
+                    if (objeto.getCodigoLocalizador() == 0){
+                        objeto.setCodigoLocalizador(principal.gerarCodigoLocalizador());
+                    }
+                    principal.verificarCodLocalizador(objeto);
+                    }
+
+                break;
 
                 case 2:
 
-                    break;
+                break;
 
                 case 3:
                     
-                    break;
+                break;
 
                 default:
                     JOptionPane.showMessageDialog(null, "Opção inválida.");
                     menu = 0;
-                    break;
+                break;
             }
         }
     }

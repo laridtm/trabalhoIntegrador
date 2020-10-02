@@ -1,15 +1,16 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
+
 public class Principal {
-    
-    public static void main(String[] args) {
 
         ArrayList<Carreta> carretas = new ArrayList<Carreta>();
         ArrayList<CaminhaoBau> caminhoes = new ArrayList<CaminhaoBau>();
         ArrayList<Van> vans = new ArrayList<Van>();
-        ArrayList<Motorista> motoristas = new ArrayList<Motorista>(); 
+        ArrayList<Motorista> motoristas = new ArrayList<Motorista>();
+        ArrayList<Objeto> objetos = new ArrayList<Objeto>(); 
         
         Motorista motorista1 = new Motorista();
         motorista1.setNome("Gustavo Pereira");
@@ -27,7 +28,6 @@ public class Principal {
         carreta1.setPlaca("MAE8233");
         carreta1.setMotorista(motorista1);
         carretas.add(carreta1);
-    }
 
     public Objeto cadastrarObjeto() {
         Objeto objeto = new Objeto();
@@ -38,14 +38,25 @@ public class Principal {
         objeto.setDataDeposito(JOptionPane.showInputDialog(null, "Digite a data do depósito:"));
         objeto.setPeso(Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o peso do objeto:")));
         objeto.setCodigoLocalizador(Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o código localizador:")));
+        objetos.add(objeto);
         return objeto;
     }
 
-    public static int gerarCodigoLocalizador() {
+    public int gerarCodigoLocalizador() {
         Random randomico = new Random();
         int aux = randomico.nextInt();
-
         return aux;
+    }
+
+    public double verificarCodLocalizador(Objeto objeto){
+        for(int i=0;i<objetos.size();i++){
+            if(objetos.get(i).getCodigoLocalizador() == objeto.getCodigoLocalizador()){
+                objeto.setCodigoLocalizador(gerarCodigoLocalizador());
+            }
+            break;
+        }
+        verificarCodLocalizador(objeto);
+        return objeto.getCodigoLocalizador();
     }
 
 
