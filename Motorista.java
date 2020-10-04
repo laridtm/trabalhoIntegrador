@@ -1,6 +1,7 @@
-public class Motorista {
 
-    private String nome;
+public class Motorista {
+	
+	private String Nome;
     private String dataNascimento;
     private String endereco;
     private String tipoCNH;
@@ -8,11 +9,11 @@ public class Motorista {
     public boolean disponivel;
 
     public String getNome() {
-        return nome;
+        return Nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String Nome) {
+        this.Nome = Nome;
     }
 
     public String getDataNascimento() {
@@ -54,4 +55,5 @@ public class Motorista {
     public void setDisponivel(boolean disponivel) {
         this.disponivel = disponivel;
     }
+
 }

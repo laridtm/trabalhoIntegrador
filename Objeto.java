@@ -1,6 +1,7 @@
-public class Objeto {
 
-    private String nomeRemetente;
+public class Objeto {
+	
+	private String nomeRemetente;
     private String enderecoRemetente;
     private String nomeDestinatario;
     private String enderecoDestinatario;
@@ -63,4 +64,5 @@ public class Objeto {
     public void setCodigoLocalizador(double codigoLocalizador) {
         this.codigoLocalizador = codigoLocalizador;
     }
+
 }

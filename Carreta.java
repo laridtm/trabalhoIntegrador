@@ -1,4 +1,6 @@
-public class Carreta extends Veiculo {
-    
-    private int capacidade = 10;
+
+public class Carreta extends Veiculo{
+	  
+	private int capacidade = 10;
+
 }

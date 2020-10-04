@@ -1,4 +1,7 @@
-public class CaminhaoBau extends Veiculo {
-    
-   private int capacidade = 3;
+
+public class CaminhaoBau extends Veiculo{
+	
+	private int capacidade = 3;
+	
+
 }

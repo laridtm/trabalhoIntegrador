@@ -1,6 +1,7 @@
+
 public class Veiculo {
-    
-    private String marca;
+	
+	private String marca;
     private String modelo;
     private int ano;
     private String placa;
@@ -45,4 +46,5 @@ public class Veiculo {
     public void setMotorista(Motorista motorista) {
         this.motorista = motorista;
     }
+
 }
