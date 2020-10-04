@@ -41,4 +41,13 @@ public class Rota {
     public List<Objeto> getObjetos() {
         return objetos;
     }
+
+    public void addObjeto(Objeto objeto) {
+        objetos.add(objeto);
+    }
+
+    @Override
+    public String toString() {
+        return "Rota [" + motorista.toString() + ", " + objetos.toString() + ", " + veiculo.toString() + "]";
+    }
 }

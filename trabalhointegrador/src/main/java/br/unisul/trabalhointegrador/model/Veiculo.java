@@ -12,6 +12,8 @@ public class Veiculo {
     private int ano;
     private String placa;
     private int tipo;
+    private int capacidade;
+    private boolean disponivel;
 
     public String getMarca() {
         return marca;
@@ -51,6 +53,27 @@ public class Veiculo {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
+    }
+
+    public int getCapacidade() {
+		return capacidade;
+	}
+
+    public boolean isDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+
+    @Override
+    public String toString() {
+        return "Veiculo [placa=" + placa + ", tipo=" + tipo + "]";
     }
 }
 

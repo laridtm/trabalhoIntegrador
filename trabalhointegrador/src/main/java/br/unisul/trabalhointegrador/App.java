@@ -5,7 +5,7 @@ import br.unisul.trabalhointegrador.model.*;
 import br.unisul.trabalhointegrador.controller.*;
 
 public class App {
-    
+
     private static Principal principal = new Principal();
 
     public static void main( String[] args )
@@ -20,11 +20,7 @@ public class App {
 
             switch (menu) {
                 case 1:
-                    Objeto objeto = principal.cadastrarObjeto();
-                    if (objeto.getCodigoLocalizador() == 0){
-                        objeto.setCodigoLocalizador(principal.gerarCodigoLocalizador());
-                    }
-                    principal.verificarCodLocalizador(objeto);   
+                    Objeto objeto = principal.cadastrarObjeto(); 
                 break;
 
                 case 2:
@@ -36,7 +32,8 @@ public class App {
                 break;
 
                 case 4: 
-                    
+                    principal.gerarRota();
+                    principal.imprimirRotas();
                 break;
 
                 default:

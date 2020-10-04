@@ -66,4 +66,9 @@ public class Objeto {
         this.codigoLocalizador = codigoLocalizador;
     }
 
+    @Override
+    public String toString() {
+        return "Objeto [codigoLocalizador=" + codigoLocalizador + "]";
+    }
+
 }

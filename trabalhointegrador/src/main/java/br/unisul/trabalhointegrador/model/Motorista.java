@@ -7,6 +7,7 @@ public class Motorista {
     private String endereco;
     private String tipoCNH;
     private double numeroCNH;
+    private boolean disponivel;
 
     public String getNome() {
         return Nome;
@@ -46,5 +47,18 @@ public class Motorista {
 
     public void setNumeroCNH(double numeroCNH) {
         this.numeroCNH = numeroCNH;
+    }
+
+    public boolean isDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+
+    @Override
+    public String toString() {
+        return "Motorista [Nome=" + Nome + ", tipoCNH=" + tipoCNH + "]";
     }
 }
