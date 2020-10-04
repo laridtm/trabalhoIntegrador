@@ -1,71 +1,73 @@
+package src.controlador;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import src.modelos.*;
 
 public class Principal {
 
-	ArrayList<Carreta> carretas = new ArrayList<Carreta>();
-	ArrayList<CaminhaoBau> caminhoes = new ArrayList<CaminhaoBau>();
-	ArrayList<Van> vans = new ArrayList<Van>();
-	ArrayList<Motorista> motoristas = new ArrayList<Motorista>();
-	ArrayList<Objeto> objetos = new ArrayList<Objeto>();
+	List<Veiculo> veiculos = new ArrayList<Veiculo>();
+	List<Motorista> motoristas = new ArrayList<Motorista>();
+	List<Objeto> objetos = new ArrayList<Objeto>();
 
 	public Motorista cadastrarMotorista() {
-
 		Motorista motorista = new Motorista();
 		motorista.setNome(JOptionPane.showInputDialog("Digite o nome do motorista"));
 		motorista.setDataNascimento(JOptionPane.showInputDialog("Digite a data de nascimento"));
 		motorista.setTipoCNH(JOptionPane.showInputDialog("Digite o tipo de cnh"));
 		motorista.setNumeroCNH(Double.parseDouble(JOptionPane.showInputDialog("Digite o numero da cnh")));
-		motorista.setEndereco(JOptionPane.showInputDialog("Digite o endereço"));
+		motorista.setEndereco(JOptionPane.showInputDialog("Digite o endereï¿½o"));
 		motorista.setDisponivel(Boolean.parseBoolean(JOptionPane.showInputDialog("Digite o disponivel")));
 		motoristas.add(motorista);
 
 		return motorista;
-
 	}
 
 	public Objeto cadastrarObjeto() {
 		Objeto objeto = new Objeto();
 		objeto.setNomeRemetente(JOptionPane.showInputDialog(null, "Digite o nome do remetente:"));
-		objeto.setEnderecoRemetente(JOptionPane.showInputDialog(null, "Digite o endereço do remetente:"));
-		objeto.setNomeDestinatario(JOptionPane.showInputDialog(null, "Digite o nome do destinatário:"));
-		objeto.setEnderecoDestinatario(JOptionPane.showInputDialog(null, "Digite o endereço do destinatário:"));
-		objeto.setDataDeposito(JOptionPane.showInputDialog(null, "Digite a data do depósito:"));
+		objeto.setEnderecoRemetente(JOptionPane.showInputDialog(null, "Digite o endereï¿½o do remetente:"));
+		objeto.setNomeDestinatario(JOptionPane.showInputDialog(null, "Digite o nome do destinatï¿½rio:"));
+		objeto.setEnderecoDestinatario(JOptionPane.showInputDialog(null, "Digite o endereï¿½o do destinatï¿½rio:"));
+		objeto.setDataDeposito(JOptionPane.showInputDialog(null, "Digite a data do depï¿½sito:"));
 		objeto.setPeso(Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o peso do objeto:")));
-		objeto.setCodigoLocalizador(
-				Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o código localizador:")));
+		objeto.setCodigoLocalizador(Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o cï¿½digo localizador:")));
 		objetos.add(objeto);
+
 		return objeto;
 	}
 
-	public Veiculo cadastrarVeiculo(Motorista motorista) {
-		int tipoVeiculo = Integer.parseInt(JOptionPane.showInputDialog(null, " Digite o tipo de veiculo:\n" 
-	    + "1 - Carreta\n" + "2 - Caminhão Bau\n" + "3 - Van"));
-	switch(tipoVeiculo) {
-	case 1: 
-		Carreta veiculo = new Carreta();
-		
-	break;
-	
-	case 2: 
-		CaminhaoBau veiculo = new CaminhaoBau();
-		
-	break;
-	
-	case 3: 
-		Van veiculo = new Van();
-		
-		break;
-		
+	public Veiculo cadastrarVeiculo() {
+		int tipoVeiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o tipo de veiculo: \n" 
+		+ "1 - Carreta \n" + "2 - CaminhÃ£o Bau \n" + "3 - Van"));
+
+		Veiculo veiculo = null;
+		switch(tipoVeiculo) {
+			case 1: 
+				veiculo = new Carreta();
+			break;
+			
+			case 2: 
+				veiculo = new CaminhaoBau();
+			break;
+			
+			case 3: 
+				veiculo = new Van();
+			break;
+		}
 		veiculo.setAno(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ano do Veiculo")));
 		veiculo.setMarca(JOptionPane.showInputDialog(null, "Digite a marca do veiculo"));
 		veiculo.setModelo(JOptionPane.showInputDialog(null, "Digite o modelo do veiculo"));
-		veiculo.setMotorista(motorista);
 		veiculo.setPlaca(JOptionPane.showInputDialog(null, "Digite a placa do veiculo"));
+		veiculo.setTipo(tipoVeiculo);
+		veiculos.add(veiculo);
+		
+		veiculos.sort((o1, o2) -> o1.getTipo() - o2.getTipo());
 
-		return veiculo
+		return veiculo;
 	}
 
 	public int gerarCodigoLocalizador() {

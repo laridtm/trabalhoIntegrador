@@ -1,11 +1,17 @@
+package src.modelos;
+
+import java.util.Comparator;
 
 public class Veiculo {
-	
+    public static int CARRETA = 1;
+    public static int CAMINHAO_BAU = 2;
+    public static int VAN = 3;
+
 	private String marca;
     private String modelo;
     private int ano;
     private String placa;
-    private Motorista motorista;
+    private int tipo;
 
     public String getMarca() {
         return marca;
@@ -39,12 +45,12 @@ public class Veiculo {
         this.placa = placa;
     }
 
-    public Motorista getMotorista() {
-        return motorista;
+    public int getTipo() {
+        return tipo;
     }
 
-    public void setMotorista(Motorista motorista) {
-        this.motorista = motorista;
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
-
 }
+

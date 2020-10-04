@@ -1,3 +1,4 @@
+package src.modelos;
 
 public class Objeto {
 	
