@@ -1,8 +1,9 @@
 package br.unisul.trabalhointegrador.model;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class Veiculo {
+public class Veiculo implements Serializable{
     public static int CARRETA = 1;
     public static int CAMINHAO_BAU = 2;
     public static int VAN = 3;

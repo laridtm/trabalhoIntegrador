@@ -12,11 +12,17 @@ public class App {
     {
         int menu = 0;
 
-        while (menu < 7) {
+        principal.carregarObjetos();
+        principal.carregarVeiculos();
+        principal.carregarMotoristas();
+        principal.carregarRotas();
+
+        while (menu < 8) {
 
             menu = Integer.parseInt(JOptionPane.showInputDialog(null, "Escolha entre as funções: \n"
                     + "1- Cadastrar objeto; \n" + "2- Cadastrar veículo; \n" + "3- Cadrastrar motorista; \n"
-                    + "4- Gerar rota; \n" + "5- Mostrar objetos restantes\n" + "6 - Devolver objetos \n" + "7 - Sair"));
+                    + "4- Gerar rota; \n" + "5- Mostrar objetos restantes\n" + "6 - Devolver objetos \n" 
+                    + "7 - Buscar rotas \n" + "8 - Sair"));
 
             switch (menu) {
                 case 1:
@@ -33,7 +39,7 @@ public class App {
 
                 case 4: 
                     principal.gerarRota();
-                    principal.imprimirRotas();
+                    principal.imprimirTodasRotas();
                 break;
 
                 case 5:
@@ -46,7 +52,11 @@ public class App {
                 break;
 
                 case 7:
+                    principal.buscarRotas();
+                break;
 
+                case 8:
+                    System.exit(0);
                 break;
 
                 default:

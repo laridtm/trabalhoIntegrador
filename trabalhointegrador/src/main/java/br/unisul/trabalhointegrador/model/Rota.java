@@ -2,9 +2,10 @@ package br.unisul.trabalhointegrador.model;
 
 import java.util.Date;
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Rota {
+public class Rota implements Serializable{
      
     private Date data;
     private Veiculo veiculo;

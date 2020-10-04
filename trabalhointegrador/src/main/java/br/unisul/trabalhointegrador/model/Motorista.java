@@ -1,6 +1,8 @@
 package br.unisul.trabalhointegrador.model;
 
-public class Motorista {
+import java.io.Serializable;
+
+public class Motorista implements Serializable {
 	
 	private String Nome;
     private String dataNascimento;
