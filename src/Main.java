@@ -11,10 +11,11 @@ public class Main {
         
         int menu = 0;
 
-        while (menu < 4) {
+        while (menu < 5) {
 
             menu = Integer.parseInt(JOptionPane.showInputDialog(null, "Escolha entre as funções: \n"
-                    + "1- Cadastrar objeto; \n" + "2- Cadastrar Veiculo; \n" + "3- Cadrastrar motorista;"));
+                    + "1- Cadastrar objeto; \n" + "2- Cadastrar veículo; \n" + "3- Cadrastrar motorista; \n"
+                    + "4- Gerar rota; \n" + "5- Sair;"));
 
             switch (menu) {
                 case 1:
@@ -22,10 +23,7 @@ public class Main {
                     if (objeto.getCodigoLocalizador() == 0){
                         objeto.setCodigoLocalizador(principal.gerarCodigoLocalizador());
                     }
-                    principal.verificarCodLocalizador(objeto);  
-
-                    // ao cadastrar o objeto, deve-se encaixálo em um dos veículos disponíveis 
-                    //em um dos dias da semana 
+                    principal.verificarCodLocalizador(objeto);   
                 break;
 
                 case 2:
@@ -34,6 +32,10 @@ public class Main {
 
                 case 3:
                     Motorista motorista = principal.cadastrarMotorista();
+                break;
+
+                case 4: 
+                    
                 break;
 
                 default:

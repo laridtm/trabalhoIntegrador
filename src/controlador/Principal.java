@@ -17,7 +17,23 @@ public class Principal {
 		Motorista motorista = new Motorista();
 		motorista.setNome(JOptionPane.showInputDialog("Digite o nome do motorista"));
 		motorista.setDataNascimento(JOptionPane.showInputDialog("Digite a data de nascimento"));
-		motorista.setTipoCNH(JOptionPane.showInputDialog("Digite o tipo de cnh"));
+
+		int tipoCNH = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o tipo da CNH: \n" 
+		+ "1- B \n" + "2- B/C"));
+		switch(tipoCNH) {
+			case 1: 
+				motorista.setTipoCNH("B");
+			break;
+				
+			case 2: 
+				motorista.setTipoCNH("C");
+			break;
+
+			default:
+				JOptionPane.showMessageDialog(null, "Opção inválida.");
+			break;
+		}
+
 		motorista.setNumeroCNH(Double.parseDouble(JOptionPane.showInputDialog("Digite o numero da cnh")));
 		motorista.setEndereco(JOptionPane.showInputDialog("Digite o endere�o"));
 		motorista.setDisponivel(Boolean.parseBoolean(JOptionPane.showInputDialog("Digite o disponivel")));
@@ -57,7 +73,12 @@ public class Principal {
 			case 3: 
 				veiculo = new Van();
 			break;
+
+			default:
+				JOptionPane.showMessageDialog(null, "Opção inválida.");
+			break;
 		}
+		
 		veiculo.setAno(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ano do Veiculo")));
 		veiculo.setMarca(JOptionPane.showInputDialog(null, "Digite a marca do veiculo"));
 		veiculo.setModelo(JOptionPane.showInputDialog(null, "Digite o modelo do veiculo"));
@@ -85,5 +106,14 @@ public class Principal {
 		}
 		verificarCodLocalizador(objeto);
 		return objeto.getCodigoLocalizador();
+	}
+
+	public void gerarRota() {
+		Motorista motorista = motoristas.get(0);
+		for (Veiculo veiculo : veiculos) {
+			if (motorista.getTipoCNH().equalsIgnoreCase("B")) {
+				
+			}
+		}
 	}
 }
