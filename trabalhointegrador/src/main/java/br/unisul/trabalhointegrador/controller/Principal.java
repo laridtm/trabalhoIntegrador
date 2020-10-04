@@ -1,11 +1,13 @@
-package src.controlador;
+package br.unisul.trabalhointegrador.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import javax.swing.JOptionPane;
-import src.modelos.*;
+
+import br.unisul.trabalhointegrador.model.*;
 
 public class Principal {
 
@@ -36,7 +38,6 @@ public class Principal {
 
 		motorista.setNumeroCNH(Double.parseDouble(JOptionPane.showInputDialog("Digite o numero da cnh")));
 		motorista.setEndereco(JOptionPane.showInputDialog("Digite o endere�o"));
-		motorista.setDisponivel(Boolean.parseBoolean(JOptionPane.showInputDialog("Digite o disponivel")));
 		motoristas.add(motorista);
 
 		return motorista;
@@ -86,8 +87,15 @@ public class Principal {
 		veiculo.setTipo(tipoVeiculo);
 		veiculos.add(veiculo);
 		
-		veiculos.sort((o1, o2) -> o1.getTipo() - o2.getTipo());
-
+		Collections.sort(veiculos, new Comparator<Veiculo>() {
+			@Override
+			public int compare(Veiculo obj1, Veiculo obj2) {
+				return obj1.getTipo() - obj2.getTipo();
+			}
+		});
+		for (Veiculo v : veiculos) {
+			System.out.println(v.toString());
+		}
 		return veiculo;
 	}
 

@@ -1,4 +1,4 @@
-package src.modelos;
+package br.unisul.trabalhointegrador.model;
 
 import java.util.Date;
 import java.util.List;
