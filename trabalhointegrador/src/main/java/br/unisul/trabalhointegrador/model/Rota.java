@@ -46,6 +46,10 @@ public class Rota {
         objetos.add(objeto);
     }
 
+    public void removerObjeto (Objeto objeto){
+        objetos.remove(objeto);
+    }
+
     @Override
     public String toString() {
         return "Rota [" + motorista.toString() + ", " + objetos.toString() + ", " + veiculo.toString() + "]";

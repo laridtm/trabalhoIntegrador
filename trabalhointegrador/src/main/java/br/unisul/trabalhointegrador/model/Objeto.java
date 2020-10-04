@@ -10,6 +10,19 @@ public class Objeto {
     private double peso;
     private double codigoLocalizador;
 
+    public Objeto() {
+    }
+
+    public Objeto(Objeto outro) {
+        this.nomeRemetente = outro.nomeRemetente;
+        this.enderecoRemetente = outro.enderecoDestinatario;
+        this.nomeDestinatario = outro.nomeDestinatario;
+        this.enderecoDestinatario = outro.enderecoDestinatario;
+        this.dataDeposito = outro.dataDeposito;
+        this.peso = outro.peso;
+        this.codigoLocalizador = outro.codigoLocalizador;
+    }
+
     public String getNomeRemetente() {
         return nomeRemetente;
     }
@@ -70,5 +83,4 @@ public class Objeto {
     public String toString() {
         return "Objeto [codigoLocalizador=" + codigoLocalizador + "]";
     }
-
 }

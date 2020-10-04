@@ -179,4 +179,25 @@ public class Principal {
 			}	
 		}
 	}
+
+	public void mostrarObjetosRestantes() {
+		String objetosRestantes = "";
+		for (Objeto objeto : objetos) {
+			objetosRestantes = objetosRestantes + objeto.toString() + "\n";	
+		}
+		JOptionPane.showMessageDialog(null, objetosRestantes);
+	}
+
+	public void devolverObjeto(double codigo) {
+		for (Rota rota : rotas) {
+			List<Objeto> listaCopia = new ArrayList<Objeto>(rota.getObjetos());
+			for (Objeto objeto : listaCopia) {
+				if (objeto.getCodigoLocalizador() == codigo) {
+					Objeto copia = new Objeto(objeto);
+					objetos.add(copia);
+					rota.removerObjeto(objeto);
+				}
+			}
+		}
+	}
 }
