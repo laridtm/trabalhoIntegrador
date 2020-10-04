@@ -28,6 +28,10 @@
 hs_err_pid*
 
 ### Maven ###
+trabalhointegrador/.classpath
+trabalhointegrador/.settings
+trabalhointegrador/.project
+trabalhointegrador/target
 target/
 pom.xml.tag
 pom.xml.releaseBackup
