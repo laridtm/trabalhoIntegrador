@@ -11,7 +11,7 @@ public class Motorista implements Serializable {
     private double numeroCNH;
     private boolean disponivel;
 
-    public String getNome() {
+    public  String getNome() {
         return Nome;
     }
 

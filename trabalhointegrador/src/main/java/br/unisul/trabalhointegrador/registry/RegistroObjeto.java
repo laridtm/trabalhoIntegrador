@@ -37,6 +37,8 @@ public class RegistroObjeto {
 			ois.close();
 		} catch (Exception e) {
 			System.out.println(e.toString());
+		}finally {
+			
 		}
 
 		return listaObjetos;

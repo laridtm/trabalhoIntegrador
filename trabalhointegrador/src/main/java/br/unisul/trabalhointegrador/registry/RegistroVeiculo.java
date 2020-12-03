@@ -36,6 +36,8 @@ public class RegistroVeiculo {
 			ois.close();
 		} catch (Exception e) {
 			System.out.println(e.toString());
+		}finally {
+			
 		}
 
 		return listaVeiculos;

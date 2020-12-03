@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
+import br.unisul.trabalhointegrador.dao.DaoFactory;
+import br.unisul.trabalhointegrador.dao.MotoristaDao;
 import br.unisul.trabalhointegrador.model.*;
 import br.unisul.trabalhointegrador.registry.*;
 
@@ -29,24 +31,24 @@ public class Principal {
 
 		int tipoCNH = 0;
 		do {
-			tipoCNH = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o tipo da CNH: \n" 
-			+ "1- B \n" + "2- B/C"));
-		
-			switch(tipoCNH) {
-				case 1: 
-					motorista.setTipoCNH("B");
-				break;
-					
-				case 2: 
-					motorista.setTipoCNH("C");
+			tipoCNH = Integer
+					.parseInt(JOptionPane.showInputDialog(null, "Digite o tipo da CNH: \n" + "1- B \n" + "2- B/C"));
+
+			switch (tipoCNH) {
+			case 1:
+				motorista.setTipoCNH("B");
 				break;
 
-				default:
-					JOptionPane.showMessageDialog(null, "Opção inválida.");
+			case 2:
+				motorista.setTipoCNH("C");
+				break;
+
+			default:
+				JOptionPane.showMessageDialog(null, "Opção inválida.");
 				break;
 			}
 		} while (tipoCNH != 1 && tipoCNH != 2);
-		
+
 		motorista.setNumeroCNH(Double.parseDouble(JOptionPane.showInputDialog("Digite o numero da CNH:")));
 		motorista.setEndereco(JOptionPane.showInputDialog("Digite o endereço"));
 		motoristas.add(motorista);
@@ -65,11 +67,13 @@ public class Principal {
 		objeto.setPeso(Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o peso do objeto:")));
 		double codigo = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o código localizador:"));
 
-		while (codigo == 0 || verificarCodLocalizador(codigo)){
+		while (codigo == 0 || verificarCodLocalizador(codigo)) {
 			codigo = gerarCodigoLocalizador();
 		}
 
 		objeto.setCodigoLocalizador(codigo);
+                
+                /* Remover tudo de cima, receber objeto por parametro*/
 
 		objetos.add(objeto);
 		RegistroObjeto.salvarObjetos(objetos);
@@ -78,35 +82,35 @@ public class Principal {
 	}
 
 	public Veiculo cadastrarVeiculo() {
-		int tipoVeiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o tipo de veiculo: \n" 
-		+ "1 - Carreta \n" + "2 - Caminhão Baú \n" + "3 - Van"));
+		int tipoVeiculo = Integer.parseInt(JOptionPane.showInputDialog(null,
+				"Digite o tipo de veiculo: \n" + "1 - Carreta \n" + "2 - Caminhão Baú \n" + "3 - Van"));
 
 		Veiculo veiculo = null;
-		switch(tipoVeiculo) {
-			case 1: 
-				veiculo = new Carreta();
-			break;
-			
-			case 2: 
-				veiculo = new CaminhaoBau();
-			break;
-			
-			case 3: 
-				veiculo = new Van();
+		switch (tipoVeiculo) {
+		case 1:
+			veiculo = new Carreta();
 			break;
 
-			default:
-				JOptionPane.showMessageDialog(null, "Opção inválida.");
+		case 2:
+			veiculo = new CaminhaoBau();
+			break;
+
+		case 3:
+			veiculo = new Van();
+			break;
+
+		default:
+			JOptionPane.showMessageDialog(null, "Opção inválida.");
 			break;
 		}
-		
+
 		veiculo.setAno(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ano do Veiculo:")));
 		veiculo.setMarca(JOptionPane.showInputDialog(null, "Digite a marca do veiculo:"));
 		veiculo.setModelo(JOptionPane.showInputDialog(null, "Digite o modelo do veiculo:"));
 		veiculo.setPlaca(JOptionPane.showInputDialog(null, "Digite a placa do veiculo:"));
 		veiculo.setTipo(tipoVeiculo);
 		veiculos.add(veiculo);
-		
+
 		Collections.sort(veiculos, new Comparator<Veiculo>() {
 			@Override
 			public int compare(Veiculo obj1, Veiculo obj2) {
@@ -160,7 +164,7 @@ public class Principal {
 	public void imprimirRotas(List<Rota> rotasImprimir) {
 		String relatorioRotas = "";
 		for (Rota rota : rotasImprimir) {
-			relatorioRotas = relatorioRotas + rota.toString() + "\n";	
+			relatorioRotas = relatorioRotas + rota.toString() + "\n";
 		}
 		JOptionPane.showMessageDialog(null, relatorioRotas);
 	}
@@ -180,29 +184,29 @@ public class Principal {
 						motorista.setDisponivel(false);
 						veiculo.setDisponivel(false);
 						Rota rota = new Rota(veiculo, motorista);
-	
+
 						for (int i = 0; i < veiculo.getCapacidade(); i++) {
 							if (objetos.isEmpty()) {
 								break;
 							}
-							rota.addObjeto(objetos.remove(0)); 
+							rota.addObjeto(objetos.remove(0));
 						}
-						
-						if(!rota.getObjetos().isEmpty()){
+
+						if (!rota.getObjetos().isEmpty()) {
 							rotas.add(rota);
 							rotasAntigas.add(rota);
 							RegistroRota.salvarRotas(rotasAntigas);
 						}
-					} 
+					}
 				}
-			}	
+			}
 		}
 	}
 
 	public void mostrarObjetosRestantes() {
 		String objetosRestantes = "";
 		for (Objeto objeto : objetos) {
-			objetosRestantes = objetosRestantes + objeto.toString() + "\n";	
+			objetosRestantes = objetosRestantes + objeto.toString() + "\n";
 		}
 		JOptionPane.showMessageDialog(null, objetosRestantes);
 	}
@@ -220,75 +224,74 @@ public class Principal {
 		}
 	}
 
-	public void buscarRotas(){
+	public void buscarRotas() {
 		int tipoDeBusca = 0;
 		List<Rota> retornoBusca = new ArrayList<Rota>();
 
 		do {
-			tipoDeBusca = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o tipo de busca: \n" 
-			+ "1 - Data \n" + "2 - Motorista"));
+			tipoDeBusca = Integer.parseInt(
+					JOptionPane.showInputDialog(null, "Digite o tipo de busca: \n" + "1 - Data \n" + "2 - Motorista"));
 
-			switch(tipoDeBusca) {
-				case 1: 
-					String dataString = JOptionPane.showInputDialog(null, "Digite a data (dd/mm/aaaa): ");
-					SimpleDateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
-					Date date = null;
+			switch (tipoDeBusca) {
+			case 1:
+				String dataString = JOptionPane.showInputDialog(null, "Digite a data (dd/mm/aaaa): ");
+				SimpleDateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
+				Date date = null;
 
-					try {
-						date = formatadorData.parse(dataString);
-					} catch (ParseException e) {
-						e.printStackTrace();
+				try {
+					date = formatadorData.parse(dataString);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+
+				for (Rota rota : rotasAntigas) {
+					Calendar c1 = Calendar.getInstance();
+					Calendar c2 = Calendar.getInstance();
+
+					c1.setTime(date);
+					c2.setTime(rota.getData());
+
+					if (c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)
+							&& c1.get(Calendar.MONTH) == c2.get(Calendar.MONTH)
+							&& c1.get(Calendar.DAY_OF_MONTH) == c2.get(Calendar.DAY_OF_MONTH)) {
+						retornoBusca.add(rota);
 					}
-
-					for (Rota rota : rotasAntigas) {
-						Calendar c1 = Calendar.getInstance();
-						Calendar c2 = Calendar.getInstance();
-
-						c1.setTime(date);
-						c2.setTime(rota.getData());
-
-
-						if(c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR) && 
-							c1.get(Calendar.MONTH) == c2.get(Calendar.MONTH) &&
-							c1.get(Calendar.DAY_OF_MONTH) == c2.get(Calendar.DAY_OF_MONTH)){
-							retornoBusca.add(rota);
-						}
-					}
-				break;
-				
-				case 2:
-					String nome = JOptionPane.showInputDialog(null, "Digite o nome do motorista: ");
-
-					for (Rota rota : rotasAntigas) {
-						if(rota.getMotorista().getNome().equalsIgnoreCase(nome)){
-							retornoBusca.add(rota);
-						}
-					}
+				}
 				break;
 
-				default:
-					JOptionPane.showMessageDialog(null, "Opção inválida.");
+			case 2:
+				String nome = JOptionPane.showInputDialog(null, "Digite o nome do motorista: ");
+
+				for (Rota rota : rotasAntigas) {
+					if (rota.getMotorista().getNome().equalsIgnoreCase(nome)) {
+						retornoBusca.add(rota);
+					}
+				}
+				break;
+
+			default:
+				JOptionPane.showMessageDialog(null, "Opção inválida.");
 				break;
 			}
 		} while (tipoDeBusca != 1 && tipoDeBusca != 2);
 
 		imprimirRotas(retornoBusca);
-		
+
 	}
 
-	public void carregarObjetos(){
+	public void carregarObjetos() {
 		objetos = RegistroObjeto.carregarObjetos();
 	}
 
-	public void carregarVeiculos(){
+	public void carregarVeiculos() {
 		veiculos = RegistroVeiculo.carregarVeiculos();
 	}
 
-	public void carregarMotoristas(){
+	public void carregarMotoristas() {
 		motoristas = RegistroMotorista.carregarMotoristas();
 	}
 
-	public void carregarRotas(){
+	public void carregarRotas() {
 		rotas = new ArrayList<Rota>();
 		rotasAntigas = RegistroRota.carregarRotas();
 	}

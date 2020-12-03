@@ -10,18 +10,18 @@ import java.util.ArrayList;
 import br.unisul.trabalhointegrador.model.Motorista;
 
 public class RegistroMotorista {
-    public static void salvarMotoristas(List<Motorista> objetos){
+	public static void salvarMotoristas(List<Motorista> objetos) {
 		try {
 			FileOutputStream fos = new FileOutputStream("registro_motoristas");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(objetos);
-			oos.close();	
+			oos.close();
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
 	}
 
-	public static List<Motorista> carregarMotoristas(){
+	public static List<Motorista> carregarMotoristas() {
 		List<Motorista> listaMotoristas = new ArrayList<Motorista>();
 
 		try {
@@ -32,10 +32,12 @@ public class RegistroMotorista {
 			for (Motorista objeto : objetosLidos) {
 				listaMotoristas.add(objeto);
 			}
-			
+
 			ois.close();
 		} catch (Exception e) {
 			System.out.println(e.toString());
+		} finally {
+
 		}
 
 		return listaMotoristas;
