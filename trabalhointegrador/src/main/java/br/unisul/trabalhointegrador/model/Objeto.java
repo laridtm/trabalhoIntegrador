@@ -2,9 +2,9 @@ package br.unisul.trabalhointegrador.model;
 
 import java.io.Serializable;
 
-public class Objeto implements Serializable{
-	
-	private String nomeRemetente;
+public class Objeto implements Serializable {
+
+    private String nomeRemetente;
     private String enderecoRemetente;
     private String nomeDestinatario;
     private String enderecoDestinatario;

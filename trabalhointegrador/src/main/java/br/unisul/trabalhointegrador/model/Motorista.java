@@ -3,15 +3,15 @@ package br.unisul.trabalhointegrador.model;
 import java.io.Serializable;
 
 public class Motorista implements Serializable {
-	
-	private String Nome;
+
+    private String Nome;
     private String dataNascimento;
     private String endereco;
     private String tipoCNH;
     private double numeroCNH;
     private boolean disponivel;
 
-    public  String getNome() {
+    public String getNome() {
         return Nome;
     }
 

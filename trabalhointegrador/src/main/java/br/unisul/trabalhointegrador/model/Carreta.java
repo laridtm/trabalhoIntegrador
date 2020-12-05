@@ -1,8 +1,8 @@
 package br.unisul.trabalhointegrador.model;
 
-public class Carreta extends Veiculo{
+public class Carreta extends Veiculo {
 
-	public Carreta() {
-		this.setCapacidade(10);
-	}	
+    public Carreta() {
+        this.setCapacidade(10);
+    }
 }

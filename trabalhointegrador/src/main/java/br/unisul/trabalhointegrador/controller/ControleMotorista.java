@@ -8,28 +8,28 @@ import br.unisul.trabalhointegrador.model.Motorista;
 
 public class ControleMotorista {
 
-	private DaoFactory daoFactory = null;
-	private MotoristaDao motoristaDao = null;
-	
-	public ControleMotorista(int codigoFonte) {
-		daoFactory = DaoFactory.getDaoFactory(codigoFonte);
-		motoristaDao = daoFactory.getMotoristaDao();
-		
-	}
+    private DaoFactory daoFactory = null;
+    private MotoristaDao motoristaDao = null;
 
-	public List<Motorista> recuperarMotoristatipoCNH(String tipoCNH) {
-		return motoristaDao.recuperarMotoristatipoCNH(tipoCNH);
+    public ControleMotorista(int codigoFonte) {
+        daoFactory = DaoFactory.getDaoFactory(codigoFonte);
+        motoristaDao = daoFactory.getMotoristaDao();
 
-	}
+    }
 
-	public void removerMotorista(String tipoCNH) {
-		motoristaDao.removerMotorista(tipoCNH);
+    public List<Motorista> recuperarMotoristatipoCNH(String tipoCNH) {
+        return motoristaDao.recuperarMotoristatipoCNH(tipoCNH);
 
-	}
+    }
 
-	public void inserirMotorista(Motorista motorista) {
-		motoristaDao.inserirMotorista(motorista);
+    public void removerMotorista(String tipoCNH) {
+        motoristaDao.removerMotorista(tipoCNH);
 
-	}
+    }
+
+    public void inserirMotorista(Motorista motorista) {
+        motoristaDao.inserirMotorista(motorista);
+
+    }
 
 }

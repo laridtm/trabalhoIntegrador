@@ -5,21 +5,21 @@ import br.unisul.trabalhointegrador.dao.MotoristaDao;
 import br.unisul.trabalhointegrador.dao.ObjetoDao;
 import br.unisul.trabalhointegrador.dao.VeiculoDao;
 
-public class BancoDaoFactory extends DaoFactory{
+public class BancoDaoFactory extends DaoFactory {
 
-	@Override
-	public MotoristaDao getMotoristaDao() {
-		return new BancoMotoristaDao();
-	}
+    @Override
+    public MotoristaDao getMotoristaDao() {
+        return new BancoMotoristaDao();
+    }
 
-	@Override
-	public ObjetoDao getObjetoDao() {
-		return new BancoObjetoDao();
-	}
+    @Override
+    public ObjetoDao getObjetoDao() {
+        return new BancoObjetoDao();
+    }
 
-	@Override
-	public VeiculoDao getVeiculoDao() {
-		return new BancoVeiculoDao();
-	}
+    @Override
+    public VeiculoDao getVeiculoDao() {
+        return new BancoVeiculoDao();
+    }
 
 }

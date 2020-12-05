@@ -12,105 +12,104 @@ import br.unisul.trabalhointegrador.model.Objeto;
 
 public class ArquivoObjetoDao implements ObjetoDao {
 
-	private List<Objeto> listaObjeto = new ArrayList<Objeto>();
+    private List<Objeto> listaObjeto = new ArrayList<Objeto>();
 
-	@Override
-	public List<Objeto> recuperarObjetocodigoLocalizador(double codigoLocalizador) {
-		try {
-			FileOutputStream fos = new FileOutputStream("registro_objetos");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(listaObjeto);
-			oos.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		List<Objeto> listaObjetos = new ArrayList<Objeto>();
+    @Override
+    public List<Objeto> recuperarObjetocodigoLocalizador(double codigoLocalizador) {
+        try {
+            FileOutputStream fos = new FileOutputStream("registro_objetos");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(listaObjeto);
+            oos.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        List<Objeto> listaObjetos = new ArrayList<Objeto>();
 
-		try {
-			FileInputStream fis = new FileInputStream("registro_objetos");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			List<Objeto> objetosLidos = (List<Objeto>) ois.readObject();
+        try {
+            FileInputStream fis = new FileInputStream("registro_objetos");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            List<Objeto> objetosLidos = (List<Objeto>) ois.readObject();
 
-			for (Objeto objeto : objetosLidos) {
-				listaObjetos.add(objeto);
-			}
+            for (Objeto objeto : objetosLidos) {
+                listaObjetos.add(objeto);
+            }
 
-			ois.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		} finally {
+            ois.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
 
-		}
+        }
 
-		return listaObjetos;
+        return listaObjetos;
 
-	}
+    }
 
-	@Override
-	public void removerObjeto(double codigoLocalizador) {
-		try {
+    @Override
+    public void removerObjeto(double codigoLocalizador) {
+        try {
 
-			FileOutputStream fos = new FileOutputStream("registro_objetos");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(listaObjeto);
-			oos.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
+            FileOutputStream fos = new FileOutputStream("registro_objetos");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(listaObjeto);
+            oos.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
 
-		List<Objeto> listaObjetos = new ArrayList<Objeto>();
+        List<Objeto> listaObjetos = new ArrayList<Objeto>();
 
-		try {
-			FileInputStream fis = new FileInputStream("registro_objetos");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			List<Objeto> objetosLidos = (List<Objeto>) ois.readObject();
+        try {
+            FileInputStream fis = new FileInputStream("registro_objetos");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            List<Objeto> objetosLidos = (List<Objeto>) ois.readObject();
 
-			for (Objeto objeto : objetosLidos) {
-				listaObjetos.add(objeto);
-			}
+            for (Objeto objeto : objetosLidos) {
+                listaObjetos.add(objeto);
+            }
 
-			ois.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		} finally {
+            ois.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
 
-		}
+        }
 
-		// return listaObjetos;
+        // return listaObjetos;
+    }
 
-	}
+    @Override
+    public void inserirObjeto(Objeto objeto) {
+        try {
+            listaObjeto.add(objeto);
 
-	@Override
-	public void inserirObjeto(Objeto objeto) {
-		try {
-			listaObjeto.add(objeto);
+            FileOutputStream fos = new FileOutputStream("registro_objetos");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(listaObjeto);
+            oos.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        List<Objeto> listaObjetos = new ArrayList<Objeto>();
 
-			FileOutputStream fos = new FileOutputStream("registro_objetos");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(listaObjeto);
-			oos.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		List<Objeto> listaObjetos = new ArrayList<Objeto>();
+        try {
+            FileInputStream fis = new FileInputStream("registro_objetos");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            List<Objeto> objetosLidos = (List<Objeto>) ois.readObject();
 
-		try {
-			FileInputStream fis = new FileInputStream("registro_objetos");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			List<Objeto> objetosLidos = (List<Objeto>) ois.readObject();
+            for (Objeto objeto1 : objetosLidos) {
+                listaObjetos.add(objeto);
+            }
 
-			for (Objeto objeto1 : objetosLidos) {
-				listaObjetos.add(objeto);
-			}
+            ois.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
 
-			ois.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		} finally {
+        }
 
-		}
-
-		// return listaObjetos;
-	}
+        // return listaObjetos;
+    }
 
 }

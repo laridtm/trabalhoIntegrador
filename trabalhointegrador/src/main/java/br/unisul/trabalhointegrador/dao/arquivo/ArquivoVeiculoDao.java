@@ -12,71 +12,71 @@ import br.unisul.trabalhointegrador.model.Veiculo;
 
 public class ArquivoVeiculoDao implements VeiculoDao {
 
-	private List<Veiculo> listaVeiculo = new ArrayList<Veiculo>();
+    private List<Veiculo> listaVeiculo = new ArrayList<Veiculo>();
 
-	@Override
-	public void removerVeiculo(String placa) {
-		try {
-			FileOutputStream fos = new FileOutputStream("registro_veiculos");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(listaVeiculo);
-			oos.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
+    @Override
+    public void removerVeiculo(String placa) {
+        try {
+            FileOutputStream fos = new FileOutputStream("registro_veiculos");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(listaVeiculo);
+            oos.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
 
-		try {
-			FileInputStream fis = new FileInputStream("registro_veiculos");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			List<Veiculo> objetosLidos = (List<Veiculo>) ois.readObject();
+        try {
+            FileInputStream fis = new FileInputStream("registro_veiculos");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            List<Veiculo> objetosLidos = (List<Veiculo>) ois.readObject();
 
-			for (Veiculo objeto : objetosLidos) {
-				listaVeiculos.add(objeto);
-			}
+            for (Veiculo objeto : objetosLidos) {
+                listaVeiculos.add(objeto);
+            }
 
-			ois.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		} finally {
+            ois.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
 
-		}
+        }
 
-		// return listaVeiculos;
-	}
+        // return listaVeiculos;
+    }
 
-	@Override
-	public void inserirVeiculo(Veiculo veiculo) {
-		try {
+    @Override
+    public void inserirVeiculo(Veiculo veiculo) {
+        try {
 
-			listaVeiculo.add(veiculo);
+            listaVeiculo.add(veiculo);
 
-			FileOutputStream fos = new FileOutputStream("registro_veiculos");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(listaVeiculo);
-			oos.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
+            FileOutputStream fos = new FileOutputStream("registro_veiculos");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(listaVeiculo);
+            oos.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
 
-		try {
-			FileInputStream fis = new FileInputStream("registro_veiculos");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			List<Veiculo> objetosLidos = (List<Veiculo>) ois.readObject();
+        try {
+            FileInputStream fis = new FileInputStream("registro_veiculos");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            List<Veiculo> objetosLidos = (List<Veiculo>) ois.readObject();
 
-			for (Veiculo objeto : objetosLidos) {
-				listaVeiculos.add(objeto);
-			}
+            for (Veiculo objeto : objetosLidos) {
+                listaVeiculos.add(objeto);
+            }
 
-			ois.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		} finally {
+            ois.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
 
-		}
+        }
 
-		// return listaVeiculos;
-	}
+        // return listaVeiculos;
+    }
 
 }

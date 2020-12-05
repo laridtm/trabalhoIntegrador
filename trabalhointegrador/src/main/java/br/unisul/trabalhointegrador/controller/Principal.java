@@ -18,281 +18,197 @@ import br.unisul.trabalhointegrador.registry.*;
 
 public class Principal {
 
-	List<Veiculo> veiculos = new ArrayList<Veiculo>();
-	List<Motorista> motoristas = new ArrayList<Motorista>();
-	List<Objeto> objetos = new ArrayList<Objeto>();
-	List<Rota> rotas = new ArrayList<Rota>();
-	List<Rota> rotasAntigas = new ArrayList<Rota>();
+    List<Veiculo> veiculos = new ArrayList<Veiculo>();
+    List<Motorista> motoristas = new ArrayList<Motorista>();
+    List<Objeto> objetos = new ArrayList<Objeto>();
+    List<Rota> rotas = new ArrayList<Rota>();
+    List<Rota> rotasAntigas = new ArrayList<Rota>();
 
-	public Motorista cadastrarMotorista() {
-		Motorista motorista = new Motorista();
-		motorista.setNome(JOptionPane.showInputDialog("Digite o nome do motorista"));
-		motorista.setDataNascimento(JOptionPane.showInputDialog("Digite a data de nascimento"));
+    public Motorista cadastrarMotorista(Motorista motorista) {
+        motoristas.add(motorista);
+        RegistroMotorista.salvarMotoristas(motoristas);
 
-		int tipoCNH = 0;
-		do {
-			tipoCNH = Integer
-					.parseInt(JOptionPane.showInputDialog(null, "Digite o tipo da CNH: \n" + "1- B \n" + "2- B/C"));
+        return motorista;
+    }
 
-			switch (tipoCNH) {
-			case 1:
-				motorista.setTipoCNH("B");
-				break;
+    public void cadastrarObjeto(Objeto objeto) {
+        objetos.add(objeto);
+        RegistroObjeto.salvarObjetos(objetos);
+    }
 
-			case 2:
-				motorista.setTipoCNH("C");
-				break;
+    public void cadastrarVeiculo(Veiculo veiculo) {
+        veiculos.add(veiculo);
 
-			default:
-				JOptionPane.showMessageDialog(null, "Opção inválida.");
-				break;
-			}
-		} while (tipoCNH != 1 && tipoCNH != 2);
+        Collections.sort(veiculos, new Comparator<Veiculo>() {
+            @Override
+            public int compare(Veiculo obj1, Veiculo obj2) {
+                return obj1.getTipo() - obj2.getTipo();
+            }
+        });
 
-		motorista.setNumeroCNH(Double.parseDouble(JOptionPane.showInputDialog("Digite o numero da CNH:")));
-		motorista.setEndereco(JOptionPane.showInputDialog("Digite o endereço"));
-		motoristas.add(motorista);
-		RegistroMotorista.salvarMotoristas(motoristas);
+        RegistroVeiculo.salvarVeiculos(veiculos);
+    }
 
-		return motorista;
-	}
+    public double gerarCodigoLocalizador() {
+        Random randomico = new Random();
+        double aux = randomico.nextDouble();
+        return aux;
+    }
 
-	public Objeto cadastrarObjeto() {
-		Objeto objeto = new Objeto();
-		objeto.setNomeRemetente(JOptionPane.showInputDialog(null, "Digite o nome do remetente:"));
-		objeto.setEnderecoRemetente(JOptionPane.showInputDialog(null, "Digite o endereço do remetente:"));
-		objeto.setNomeDestinatario(JOptionPane.showInputDialog(null, "Digite o nome do destinatário:"));
-		objeto.setEnderecoDestinatario(JOptionPane.showInputDialog(null, "Digite o endereço do destinatário:"));
-		objeto.setDataDeposito(JOptionPane.showInputDialog(null, "Digite a data do depósito:"));
-		objeto.setPeso(Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o peso do objeto:")));
-		double codigo = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o código localizador:"));
+    public boolean verificarCodLocalizador(double codigo) {
+        for (int i = 0; i < objetos.size(); i++) {
+            if (objetos.get(i).getCodigoLocalizador() == codigo) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-		while (codigo == 0 || verificarCodLocalizador(codigo)) {
-			codigo = gerarCodigoLocalizador();
-		}
+    public boolean motoristaCompativel(Motorista motorista, Veiculo veiculo) {
+        if (motorista.getTipoCNH().equalsIgnoreCase("C")) {
+            return true;
+        } else {
+            if (veiculo.getTipo() == veiculo.VAN) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-		objeto.setCodigoLocalizador(codigo);
-                
-                /* Remover tudo de cima, receber objeto por parametro*/
+    public void tornarMotoristasDisponiveis() {
+        for (Motorista motorista : motoristas) {
+            motorista.setDisponivel(true);
+        }
+    }
 
-		objetos.add(objeto);
-		RegistroObjeto.salvarObjetos(objetos);
+    public void tornarVeiculosDisponiveis() {
+        for (Veiculo veiculo : veiculos) {
+            veiculo.setDisponivel(true);
+        }
+    }
 
-		return objeto;
-	}
+    public void imprimirRotas(List<Rota> rotasImprimir) {
+        String relatorioRotas = "";
+        for (Rota rota : rotasImprimir) {
+            relatorioRotas = relatorioRotas + rota.toString() + "\n";
+        }
+        JOptionPane.showMessageDialog(null, relatorioRotas);
+    }
 
-	public Veiculo cadastrarVeiculo() {
-		int tipoVeiculo = Integer.parseInt(JOptionPane.showInputDialog(null,
-				"Digite o tipo de veiculo: \n" + "1 - Carreta \n" + "2 - Caminhão Baú \n" + "3 - Van"));
+    public void imprimirTodasRotas() {
+        imprimirRotas(rotas);
+    }
 
-		Veiculo veiculo = null;
-		switch (tipoVeiculo) {
-		case 1:
-			veiculo = new Carreta();
-			break;
+    public void gerarRota() {
+        tornarMotoristasDisponiveis();
+        tornarVeiculosDisponiveis();
 
-		case 2:
-			veiculo = new CaminhaoBau();
-			break;
+        for (Motorista motorista : motoristas) {
+            if (motorista.isDisponivel()) {
+                for (Veiculo veiculo : veiculos) {
+                    if (veiculo.isDisponivel() && motoristaCompativel(motorista, veiculo)) {
+                        motorista.setDisponivel(false);
+                        veiculo.setDisponivel(false);
+                        Rota rota = new Rota(veiculo, motorista);
 
-		case 3:
-			veiculo = new Van();
-			break;
+                        for (int i = 0; i < veiculo.getCapacidade(); i++) {
+                            if (objetos.isEmpty()) {
+                                break;
+                            }
+                            rota.addObjeto(objetos.remove(0));
+                        }
 
-		default:
-			JOptionPane.showMessageDialog(null, "Opção inválida.");
-			break;
-		}
+                        if (!rota.getObjetos().isEmpty()) {
+                            rotas.add(rota);
+                            rotasAntigas.add(rota);
+                            RegistroRota.salvarRotas(rotasAntigas);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-		veiculo.setAno(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ano do Veiculo:")));
-		veiculo.setMarca(JOptionPane.showInputDialog(null, "Digite a marca do veiculo:"));
-		veiculo.setModelo(JOptionPane.showInputDialog(null, "Digite o modelo do veiculo:"));
-		veiculo.setPlaca(JOptionPane.showInputDialog(null, "Digite a placa do veiculo:"));
-		veiculo.setTipo(tipoVeiculo);
-		veiculos.add(veiculo);
+    public void mostrarObjetosRestantes() {
+        String objetosRestantes = "";
+        for (Objeto objeto : objetos) {
+            objetosRestantes = objetosRestantes + objeto.toString() + "\n";
+        }
+        JOptionPane.showMessageDialog(null, objetosRestantes);
+    }
 
-		Collections.sort(veiculos, new Comparator<Veiculo>() {
-			@Override
-			public int compare(Veiculo obj1, Veiculo obj2) {
-				return obj1.getTipo() - obj2.getTipo();
-			}
-		});
+    public void devolverObjeto(double codigo) {
+        for (Rota rota : rotas) {
+            List<Objeto> listaCopia = new ArrayList<Objeto>(rota.getObjetos());
+            for (Objeto objeto : listaCopia) {
+                if (objeto.getCodigoLocalizador() == codigo) {
+                    Objeto copia = new Objeto(objeto);
+                    objetos.add(copia);
+                    rota.removerObjeto(objeto);
+                }
+            }
+        }
+    }
 
-		RegistroVeiculo.salvarVeiculos(veiculos);
+    public void buscarRotas(int tipoDeBusca, String filtro) {
+        List<Rota> retornoBusca = new ArrayList<Rota>();
 
-		return veiculo;
-	}
+        switch (tipoDeBusca) {
+            case 0:
+                String dataString = filtro;
+                SimpleDateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = null;
 
-	public double gerarCodigoLocalizador() {
-		Random randomico = new Random();
-		double aux = randomico.nextDouble();
-		return aux;
-	}
+                try {
+                    date = formatadorData.parse(dataString);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
-	public boolean verificarCodLocalizador(double codigo) {
-		for (int i = 0; i < objetos.size(); i++) {
-			if (objetos.get(i).getCodigoLocalizador() == codigo) {
-				return true;
-			}
-		}
-		return false;
-	}
+                for (Rota rota : rotasAntigas) {
+                    Calendar c1 = Calendar.getInstance();
+                    Calendar c2 = Calendar.getInstance();
 
-	public boolean motoristaCompativel(Motorista motorista, Veiculo veiculo) {
-		if (motorista.getTipoCNH().equalsIgnoreCase("C")) {
-			return true;
-		} else {
-			if (veiculo.getTipo() == veiculo.VAN) {
-				return true;
-			}
-		}
-		return false;
-	}
+                    c1.setTime(date);
+                    c2.setTime(rota.getData());
 
-	public void tornarMotoristasDisponiveis() {
-		for (Motorista motorista : motoristas) {
-			motorista.setDisponivel(true);
-		}
-	}
+                    if (c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)
+                            && c1.get(Calendar.MONTH) == c2.get(Calendar.MONTH)
+                            && c1.get(Calendar.DAY_OF_MONTH) == c2.get(Calendar.DAY_OF_MONTH)) {
+                        retornoBusca.add(rota);
+                    }
+                }
+                break;
 
-	public void tornarVeiculosDisponiveis() {
-		for (Veiculo veiculo : veiculos) {
-			veiculo.setDisponivel(true);
-		}
-	}
+            case 1:
+                String nome = filtro;
 
-	public void imprimirRotas(List<Rota> rotasImprimir) {
-		String relatorioRotas = "";
-		for (Rota rota : rotasImprimir) {
-			relatorioRotas = relatorioRotas + rota.toString() + "\n";
-		}
-		JOptionPane.showMessageDialog(null, relatorioRotas);
-	}
+                for (Rota rota : rotasAntigas) {
+                    if (rota.getMotorista().getNome().equalsIgnoreCase(nome)) {
+                        retornoBusca.add(rota);
+                    }
+                }
+                break;
+        }
 
-	public void imprimirTodasRotas() {
-		imprimirRotas(rotas);
-	}
+        imprimirRotas(retornoBusca);
 
-	public void gerarRota() {
-		tornarMotoristasDisponiveis();
-		tornarVeiculosDisponiveis();
+    }
 
-		for (Motorista motorista : motoristas) {
-			if (motorista.isDisponivel()) {
-				for (Veiculo veiculo : veiculos) {
-					if (veiculo.isDisponivel() && motoristaCompativel(motorista, veiculo)) {
-						motorista.setDisponivel(false);
-						veiculo.setDisponivel(false);
-						Rota rota = new Rota(veiculo, motorista);
+    public void carregarObjetos() {
+        objetos = RegistroObjeto.carregarObjetos();
+    }
 
-						for (int i = 0; i < veiculo.getCapacidade(); i++) {
-							if (objetos.isEmpty()) {
-								break;
-							}
-							rota.addObjeto(objetos.remove(0));
-						}
+    public void carregarVeiculos() {
+        veiculos = RegistroVeiculo.carregarVeiculos();
+    }
 
-						if (!rota.getObjetos().isEmpty()) {
-							rotas.add(rota);
-							rotasAntigas.add(rota);
-							RegistroRota.salvarRotas(rotasAntigas);
-						}
-					}
-				}
-			}
-		}
-	}
+    public void carregarMotoristas() {
+        motoristas = RegistroMotorista.carregarMotoristas();
+    }
 
-	public void mostrarObjetosRestantes() {
-		String objetosRestantes = "";
-		for (Objeto objeto : objetos) {
-			objetosRestantes = objetosRestantes + objeto.toString() + "\n";
-		}
-		JOptionPane.showMessageDialog(null, objetosRestantes);
-	}
-
-	public void devolverObjeto(double codigo) {
-		for (Rota rota : rotas) {
-			List<Objeto> listaCopia = new ArrayList<Objeto>(rota.getObjetos());
-			for (Objeto objeto : listaCopia) {
-				if (objeto.getCodigoLocalizador() == codigo) {
-					Objeto copia = new Objeto(objeto);
-					objetos.add(copia);
-					rota.removerObjeto(objeto);
-				}
-			}
-		}
-	}
-
-	public void buscarRotas() {
-		int tipoDeBusca = 0;
-		List<Rota> retornoBusca = new ArrayList<Rota>();
-
-		do {
-			tipoDeBusca = Integer.parseInt(
-					JOptionPane.showInputDialog(null, "Digite o tipo de busca: \n" + "1 - Data \n" + "2 - Motorista"));
-
-			switch (tipoDeBusca) {
-			case 1:
-				String dataString = JOptionPane.showInputDialog(null, "Digite a data (dd/mm/aaaa): ");
-				SimpleDateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
-				Date date = null;
-
-				try {
-					date = formatadorData.parse(dataString);
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-
-				for (Rota rota : rotasAntigas) {
-					Calendar c1 = Calendar.getInstance();
-					Calendar c2 = Calendar.getInstance();
-
-					c1.setTime(date);
-					c2.setTime(rota.getData());
-
-					if (c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)
-							&& c1.get(Calendar.MONTH) == c2.get(Calendar.MONTH)
-							&& c1.get(Calendar.DAY_OF_MONTH) == c2.get(Calendar.DAY_OF_MONTH)) {
-						retornoBusca.add(rota);
-					}
-				}
-				break;
-
-			case 2:
-				String nome = JOptionPane.showInputDialog(null, "Digite o nome do motorista: ");
-
-				for (Rota rota : rotasAntigas) {
-					if (rota.getMotorista().getNome().equalsIgnoreCase(nome)) {
-						retornoBusca.add(rota);
-					}
-				}
-				break;
-
-			default:
-				JOptionPane.showMessageDialog(null, "Opção inválida.");
-				break;
-			}
-		} while (tipoDeBusca != 1 && tipoDeBusca != 2);
-
-		imprimirRotas(retornoBusca);
-
-	}
-
-	public void carregarObjetos() {
-		objetos = RegistroObjeto.carregarObjetos();
-	}
-
-	public void carregarVeiculos() {
-		veiculos = RegistroVeiculo.carregarVeiculos();
-	}
-
-	public void carregarMotoristas() {
-		motoristas = RegistroMotorista.carregarMotoristas();
-	}
-
-	public void carregarRotas() {
-		rotas = new ArrayList<Rota>();
-		rotasAntigas = RegistroRota.carregarRotas();
-	}
+    public void carregarRotas() {
+        rotas = new ArrayList<Rota>();
+        rotasAntigas = RegistroRota.carregarRotas();
+    }
 }

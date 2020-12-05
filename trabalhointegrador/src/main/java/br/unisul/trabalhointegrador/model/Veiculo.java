@@ -3,12 +3,13 @@ package br.unisul.trabalhointegrador.model;
 import java.io.Serializable;
 import java.util.Comparator;
 
-public class Veiculo implements Serializable{
+public class Veiculo implements Serializable {
+
     public static int CARRETA = 1;
     public static int CAMINHAO_BAU = 2;
     public static int VAN = 3;
 
-	private String marca;
+    private String marca;
     private String modelo;
     private int ano;
     private String placa;
@@ -61,8 +62,8 @@ public class Veiculo implements Serializable{
     }
 
     public int getCapacidade() {
-		return capacidade;
-	}
+        return capacidade;
+    }
 
     public boolean isDisponivel() {
         return disponivel;
@@ -77,4 +78,3 @@ public class Veiculo implements Serializable{
         return "Veiculo [placa=" + placa + ", tipo=" + tipo + "]";
     }
 }
-

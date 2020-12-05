@@ -6,21 +6,21 @@ import br.unisul.trabalhointegrador.model.Veiculo;
 
 public class ControleVeiculo {
 
-	private DaoFactory daoFactory = null;
-	private VeiculoDao veiculoDao = null;
+    private DaoFactory daoFactory = null;
+    private VeiculoDao veiculoDao = null;
 
-	public ControleVeiculo(int codigoFonte) {
-		daoFactory = DaoFactory.getDaoFactory(codigoFonte);
-		veiculoDao = daoFactory.getVeiculoDao();
-	}
+    public ControleVeiculo(int codigoFonte) {
+        daoFactory = DaoFactory.getDaoFactory(codigoFonte);
+        veiculoDao = daoFactory.getVeiculoDao();
+    }
 
-	public void removerVeiculo(String placa) {
-		veiculoDao.removerVeiculo(placa);
+    public void removerVeiculo(String placa) {
+        veiculoDao.removerVeiculo(placa);
 
-	}
+    }
 
-	public void inserirVeiculo(Veiculo veiculo) {
-		veiculoDao.inserirVeiculo(veiculo);
+    public void inserirVeiculo(Veiculo veiculo) {
+        veiculoDao.inserirVeiculo(veiculo);
 
-	}
+    }
 }

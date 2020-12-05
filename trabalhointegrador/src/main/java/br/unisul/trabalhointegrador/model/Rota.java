@@ -5,8 +5,8 @@ import java.util.List;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Rota implements Serializable{
-     
+public class Rota implements Serializable {
+
     private Date data;
     private Veiculo veiculo;
     private Motorista motorista;
@@ -47,7 +47,7 @@ public class Rota implements Serializable{
         objetos.add(objeto);
     }
 
-    public void removerObjeto (Objeto objeto){
+    public void removerObjeto(Objeto objeto) {
         objetos.remove(objeto);
     }
 

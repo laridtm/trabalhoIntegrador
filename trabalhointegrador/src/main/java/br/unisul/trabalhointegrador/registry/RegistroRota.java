@@ -10,36 +10,37 @@ import java.util.ArrayList;
 import br.unisul.trabalhointegrador.model.Rota;
 
 public class RegistroRota {
-    public static void salvarRotas(List<Rota> objetos){
-		try {
-			FileOutputStream fos = new FileOutputStream("registro_rotas");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(objetos);
-			oos.close();	
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-	}
 
-	public static List<Rota> carregarRotas(){
-		List<Rota> listaRotas = new ArrayList<Rota>();
+    public static void salvarRotas(List<Rota> objetos) {
+        try {
+            FileOutputStream fos = new FileOutputStream("registro_rotas");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(objetos);
+            oos.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
 
-		try {
-			FileInputStream fis = new FileInputStream("registro_rotas");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			List<Rota> objetosLidos = (List<Rota>) ois.readObject();
+    public static List<Rota> carregarRotas() {
+        List<Rota> listaRotas = new ArrayList<Rota>();
 
-			for (Rota objeto : objetosLidos) {
-				listaRotas.add(objeto);
-			}
-			
-			ois.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}finally {
-			
-		}
+        try {
+            FileInputStream fis = new FileInputStream("registro_rotas");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            List<Rota> objetosLidos = (List<Rota>) ois.readObject();
 
-		return listaRotas;
-	}
+            for (Rota objeto : objetosLidos) {
+                listaRotas.add(objeto);
+            }
+
+            ois.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+
+        }
+
+        return listaRotas;
+    }
 }

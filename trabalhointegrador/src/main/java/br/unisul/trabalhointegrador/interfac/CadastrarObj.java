@@ -5,23 +5,27 @@
  */
 package br.unisul.trabalhointegrador.interfac;
 
+import br.unisul.trabalhointegrador.controller.Principal;
 import br.unisul.trabalhointegrador.model.Objeto;
+import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 /**
  *
  * @author alefmartins
  */
 public class CadastrarObj extends javax.swing.JFrame {
-    
-    private MainView view;
+
+    private Principal principal;
 
     /**
      * Creates new form CadastrarObj
      */
-    public CadastrarObj(MainView view) {
+    public CadastrarObj(Principal principal) {
         initComponents();
-        this.view = view;
+        this.principal = principal;
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -56,15 +60,15 @@ public class CadastrarObj extends javax.swing.JFrame {
 
         jLabel2.setText("Endereço do Remetente");
 
-        jLabel3.setText("Nome do Destinatario");
+        jLabel3.setText("Nome do Destinatário");
 
-        jLabel4.setText("Endereço do Destinatario");
+        jLabel4.setText("Endereço do Destinatário");
 
-        jLabel5.setText("Data");
+        jLabel5.setText("Data de Depósito");
 
         jLabel6.setText("Peso");
 
-        jLabel7.setText("Codigo");
+        jLabel7.setText("Código");
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -174,8 +178,11 @@ public class CadastrarObj extends javax.swing.JFrame {
         objeto.setDataDeposito(lblData.getText());
         objeto.setPeso(Double.parseDouble(lblPeso.getText()));
         objeto.setCodigoLocalizador(Double.parseDouble(lblCodigo.getText()));
-        view.adcionaObjeto(objeto);
-        view.setVisible(true);
+
+        while (objeto.getCodigoLocalizador() == 0 || principal.verificarCodLocalizador(objeto.getCodigoLocalizador())) {
+            objeto.setCodigoLocalizador(principal.gerarCodigoLocalizador());
+        }
+        principal.cadastrarObjeto(objeto);
         this.dispose();
     }//GEN-LAST:event_btnSalvarActionPerformed
 

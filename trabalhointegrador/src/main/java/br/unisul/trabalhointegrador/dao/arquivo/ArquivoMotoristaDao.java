@@ -12,104 +12,104 @@ import br.unisul.trabalhointegrador.model.Motorista;
 
 public class ArquivoMotoristaDao implements MotoristaDao {
 
-	private List<Motorista> listaMotorista = new ArrayList<Motorista>(1000);
+    private List<Motorista> listaMotorista = new ArrayList<Motorista>(1000);
 
-	@Override
-	public List<Motorista> recuperarMotoristatipoCNH(String tipoCNH) {
-		try {
+    @Override
+    public List<Motorista> recuperarMotoristatipoCNH(String tipoCNH) {
+        try {
 
-			FileOutputStream fos = new FileOutputStream("registro_motoristas");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(listaMotorista);
-			oos.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
+            FileOutputStream fos = new FileOutputStream("registro_motoristas");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(listaMotorista);
+            oos.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
 
-		List<Motorista> listaMotoristas = new ArrayList<Motorista>();
-		try {
-			FileInputStream fis = new FileInputStream("registro_motoristas");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			List<Motorista> objetosLidos = (List<Motorista>) ois.readObject();
+        List<Motorista> listaMotoristas = new ArrayList<Motorista>();
+        try {
+            FileInputStream fis = new FileInputStream("registro_motoristas");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            List<Motorista> objetosLidos = (List<Motorista>) ois.readObject();
 
-			for (Motorista objeto : objetosLidos) {
-				listaMotoristas.add(objeto);
-			}
+            for (Motorista objeto : objetosLidos) {
+                listaMotoristas.add(objeto);
+            }
 
-			ois.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		} finally {
+            ois.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
 
-		}
+        }
 
-		return listaMotoristas;
+        return listaMotoristas;
 
-	}
+    }
 
-	@Override
-	public void removerMotorista(String tipoCNH) {
-		try {
+    @Override
+    public void removerMotorista(String tipoCNH) {
+        try {
 
-			FileOutputStream fos = new FileOutputStream("registro_motoristas");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(listaMotorista);
-			oos.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
+            FileOutputStream fos = new FileOutputStream("registro_motoristas");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(listaMotorista);
+            oos.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
 
-		List<Motorista> listaMotoristas = new ArrayList<Motorista>();
-		try {
-			FileInputStream fis = new FileInputStream("registro_motoristas");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			List<Motorista> objetosLidos = (List<Motorista>) ois.readObject();
+        List<Motorista> listaMotoristas = new ArrayList<Motorista>();
+        try {
+            FileInputStream fis = new FileInputStream("registro_motoristas");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            List<Motorista> objetosLidos = (List<Motorista>) ois.readObject();
 
-			for (Motorista objeto : objetosLidos) {
-				listaMotoristas.add(objeto);
-			}
+            for (Motorista objeto : objetosLidos) {
+                listaMotoristas.add(objeto);
+            }
 
-			ois.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		} finally {
+            ois.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
 
-		}
+        }
 
-		// return listaMotoristas;
-	}
+        // return listaMotoristas;
+    }
 
-	@Override
-	public void inserirMotorista(Motorista motorista) {
-		try {
-			listaMotorista.add(motorista);
+    @Override
+    public void inserirMotorista(Motorista motorista) {
+        try {
+            listaMotorista.add(motorista);
 
-			FileOutputStream fos = new FileOutputStream("registro_motoristas");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(listaMotorista);
-			oos.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
+            FileOutputStream fos = new FileOutputStream("registro_motoristas");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(listaMotorista);
+            oos.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
 
-		List<Motorista> listaMotoristas = new ArrayList<Motorista>();
-		try {
-			FileInputStream fis = new FileInputStream("registro_motoristas");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			List<Motorista> objetosLidos = (List<Motorista>) ois.readObject();
+        List<Motorista> listaMotoristas = new ArrayList<Motorista>();
+        try {
+            FileInputStream fis = new FileInputStream("registro_motoristas");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            List<Motorista> objetosLidos = (List<Motorista>) ois.readObject();
 
-			for (Motorista objeto : objetosLidos) {
-				listaMotoristas.add(objeto);
-			}
+            for (Motorista objeto : objetosLidos) {
+                listaMotoristas.add(objeto);
+            }
 
-			ois.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		} finally {
+            ois.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
 
-		}
+        }
 
-		// return listaMotoristas;
-	}
+        // return listaMotoristas;
+    }
 
 }

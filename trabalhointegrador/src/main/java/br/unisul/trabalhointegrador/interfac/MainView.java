@@ -5,7 +5,10 @@
  */
 package br.unisul.trabalhointegrador.interfac;
 
+import br.unisul.trabalhointegrador.controller.Principal;
 import br.unisul.trabalhointegrador.model.Objeto;
+import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -13,18 +16,19 @@ import br.unisul.trabalhointegrador.model.Objeto;
  */
 public class MainView extends javax.swing.JFrame {
 
-    
+    private Principal principal = new Principal();
+
     /**
      * Creates new form MainView
      */
     public MainView() {
+        principal.carregarObjetos();
+        principal.carregarVeiculos();
+        principal.carregarMotoristas();
+        principal.carregarRotas();
         initComponents();
         this.setLocationRelativeTo(null);
-    }
-    
-    public void adcionaObjeto(Objeto obj){
-        System.out.println(obj.toString());
-        // Chamar o principal.cadastarobjeto(obj)
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     /**
@@ -37,7 +41,13 @@ public class MainView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnCadastrarCaminhao = new javax.swing.JButton();
+        btnCadastrarObj = new javax.swing.JButton();
+        btnCadastrarVeiculo = new javax.swing.JButton();
+        jbtnCadastrarMotorista = new javax.swing.JButton();
+        btnGerarRotas = new javax.swing.JButton();
+        btnMostrarObjRestantes = new javax.swing.JButton();
+        jDevolverObj = new javax.swing.JButton();
+        BuscarRotas = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -55,12 +65,56 @@ public class MainView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Trabalho Integrador");
 
-        btnCadastrarCaminhao.setText("Cadastrar Caminhao");
-        btnCadastrarCaminhao.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrarObj.setText("Cadastrar Objeto");
+        btnCadastrarObj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarCaminhaoActionPerformed(evt);
+                btnCadastrarObjActionPerformed(evt);
+            }
+        });
+
+        btnCadastrarVeiculo.setText("Cadastrar Veículo");
+        btnCadastrarVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarVeiculoActionPerformed(evt);
+            }
+        });
+
+        jbtnCadastrarMotorista.setText("Cadastrar Motorista");
+        jbtnCadastrarMotorista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnCadastrarMotoristaActionPerformed(evt);
+            }
+        });
+
+        btnGerarRotas.setText("Gerar Rotas");
+        btnGerarRotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarRotasActionPerformed(evt);
+            }
+        });
+
+        btnMostrarObjRestantes.setText("Mostrar Objetos Restantes");
+        btnMostrarObjRestantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarObjRestantesActionPerformed(evt);
+            }
+        });
+
+        jDevolverObj.setText("Devolver Objetos");
+        jDevolverObj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDevolverObjActionPerformed(evt);
+            }
+        });
+
+        BuscarRotas.setText("Buscar Rotas");
+        BuscarRotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarRotasActionPerformed(evt);
             }
         });
 
@@ -131,23 +185,39 @@ public class MainView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(296, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(266, 266, 266))
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(btnCadastrarCaminhao)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadastrarObj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadastrarVeiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnCadastrarMotorista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGerarRotas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMostrarObjRestantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jDevolverObj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BuscarRotas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27)
-                .addComponent(btnCadastrarCaminhao)
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(btnCadastrarObj)
+                .addGap(18, 18, 18)
+                .addComponent(btnCadastrarVeiculo)
+                .addGap(18, 18, 18)
+                .addComponent(jbtnCadastrarMotorista)
+                .addGap(18, 18, 18)
+                .addComponent(btnGerarRotas)
+                .addGap(18, 18, 18)
+                .addComponent(btnMostrarObjRestantes)
+                .addGap(18, 18, 18)
+                .addComponent(jDevolverObj)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(BuscarRotas)
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -157,11 +227,39 @@ public class MainView extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
-    private void btnCadastrarCaminhaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarCaminhaoActionPerformed
-        CadastrarObj cadastroObjeto = new CadastrarObj(this);
+    private void btnCadastrarObjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarObjActionPerformed
+        CadastrarObj cadastroObjeto = new CadastrarObj(principal);
         cadastroObjeto.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnCadastrarCaminhaoActionPerformed
+    }//GEN-LAST:event_btnCadastrarObjActionPerformed
+
+    private void btnCadastrarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarVeiculoActionPerformed
+        CadastrarVeiculo cadastroVeiculo = new CadastrarVeiculo(principal);
+        cadastroVeiculo.setVisible(true);
+    }//GEN-LAST:event_btnCadastrarVeiculoActionPerformed
+
+    private void btnGerarRotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRotasActionPerformed
+        principal.gerarRota();
+        principal.imprimirTodasRotas();
+    }//GEN-LAST:event_btnGerarRotasActionPerformed
+
+    private void jbtnCadastrarMotoristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCadastrarMotoristaActionPerformed
+        CadastrarMotorista cadastroMotorista = new CadastrarMotorista(principal);
+        cadastroMotorista.setVisible(true);
+    }//GEN-LAST:event_jbtnCadastrarMotoristaActionPerformed
+
+    private void btnMostrarObjRestantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarObjRestantesActionPerformed
+        principal.mostrarObjetosRestantes();
+    }//GEN-LAST:event_btnMostrarObjRestantesActionPerformed
+
+    private void jDevolverObjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDevolverObjActionPerformed
+        double codigo = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o código localizador:"));
+        principal.devolverObjeto(codigo);
+    }//GEN-LAST:event_jDevolverObjActionPerformed
+
+    private void BuscarRotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarRotasActionPerformed
+        BuscarRotas buscarRotas = new BuscarRotas(principal);
+        buscarRotas.setVisible(true);
+    }//GEN-LAST:event_BuscarRotasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,8 +297,12 @@ public class MainView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BuscarRotas;
     private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JButton btnCadastrarCaminhao;
+    private javax.swing.JButton btnCadastrarObj;
+    private javax.swing.JButton btnCadastrarVeiculo;
+    private javax.swing.JButton btnGerarRotas;
+    private javax.swing.JButton btnMostrarObjRestantes;
     private javax.swing.JMenuItem contentsMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
@@ -209,7 +311,9 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JButton jDevolverObj;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jbtnCadastrarMotorista;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;

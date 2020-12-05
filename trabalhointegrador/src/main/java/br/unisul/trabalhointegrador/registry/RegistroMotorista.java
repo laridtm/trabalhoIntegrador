@@ -10,36 +10,37 @@ import java.util.ArrayList;
 import br.unisul.trabalhointegrador.model.Motorista;
 
 public class RegistroMotorista {
-	public static void salvarMotoristas(List<Motorista> objetos) {
-		try {
-			FileOutputStream fos = new FileOutputStream("registro_motoristas");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(objetos);
-			oos.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-	}
 
-	public static List<Motorista> carregarMotoristas() {
-		List<Motorista> listaMotoristas = new ArrayList<Motorista>();
+    public static void salvarMotoristas(List<Motorista> objetos) {
+        try {
+            FileOutputStream fos = new FileOutputStream("registro_motoristas");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(objetos);
+            oos.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
 
-		try {
-			FileInputStream fis = new FileInputStream("registro_motoristas");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			List<Motorista> objetosLidos = (List<Motorista>) ois.readObject();
+    public static List<Motorista> carregarMotoristas() {
+        List<Motorista> listaMotoristas = new ArrayList<Motorista>();
 
-			for (Motorista objeto : objetosLidos) {
-				listaMotoristas.add(objeto);
-			}
+        try {
+            FileInputStream fis = new FileInputStream("registro_motoristas");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            List<Motorista> objetosLidos = (List<Motorista>) ois.readObject();
 
-			ois.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		} finally {
+            for (Motorista objeto : objetosLidos) {
+                listaMotoristas.add(objeto);
+            }
 
-		}
+            ois.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
 
-		return listaMotoristas;
-	}
+        }
+
+        return listaMotoristas;
+    }
 }
